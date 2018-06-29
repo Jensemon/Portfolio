@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.grid > div {
+  background: rgb(230, 230, 240);
+  padding: 1em;
+}
+
+.grid > div:nth-child(even) {
+  background: rgb(250, 250, 250);
+}
