@@ -28,6 +28,41 @@ function onOff(element) {
   } else throw 'Id does not contain "On" or "Off"';
 }
 
+function setBoxTransitions(arr) {
+  var str = "";
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].id;
+    str +=
+      "#" +
+      arr[i].id +
+      "{" +
+      "position: relative;" +
+      "right: 100vw;" +
+      "transition-property: right;" +
+      "transition-duration: 0.5s;" +
+      "transition-timing-function: ease-in-out;" +
+      "transition-delay: 0ms;" +
+      "}";
+
+    str +=
+      "#" +
+      arr[i].id.replace("Off", "On") +
+      "{" +
+      "position: relative;" +
+      "right: 0vw;" +
+      "transition-property: right;" +
+      "transition-duration: 0.5s;" +
+      "transition-timing-function: ease-in-out;" +
+      "transition-delay: 0ms;" +
+      "}";
+  }
+  return str;
+}
+
+var boxOnOffStyle = document.createElement("style");
+boxOnOffStyle.innerHTML = setBoxTransitions(box);
+document.body.appendChild(boxOnOffStyle);
+
 //test fluff
 
 //setValue(box[1], "color", "red");
@@ -48,6 +83,12 @@ colorTheme = {};
   });
 */
 
-document
-  .getElementById("projects")
-  .addEventListener("click", onOff.bind(this, box[5]));
+document.getElementById("projects").addEventListener("click", function() {
+  for (let i = 0; i < box.length; i++) {
+    onOff(box[i]);
+  }
+});
+
+// document
+//   .getElementById("projects")
+//   .addEventListener("click", onOff.bind(this, box[1]));
