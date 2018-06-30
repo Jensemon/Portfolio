@@ -28,20 +28,25 @@ function onOff(element) {
   } else throw 'Id does not contain "On" or "Off"';
 }
 
+// takes an array of html elements that all needs an id that includes('Off')
+// loops through each element and appends an empty string with properties and
+// values for each elements 'Off' and 'On' state
+// returns the css string
 function setBoxTransitions(arr) {
   var str = "";
+  var direction;
   for (let i = 0; i < arr.length; i++) {
     arr[i].id;
+    direction = randomDirection();
     str +=
       "#" +
       arr[i].id +
       "{" +
       "position: relative;" +
-      "right: 100vw;" +
-      "transition-property: right;" +
-      "transition-duration: 0.5s;" +
-      "transition-timing-function: ease-in-out;" +
-      "transition-delay: 0ms;" +
+      (direction + ": 100vw;") +
+      //"transition: all 1000ms cubic-bezier(0.64, -0.37, 0.61, 1.27);" +
+      "transition: all 1000ms cubic-bezier(.64,-0.37,.34,.9);" +
+      ("transition-delay: " + random(200) + "ms;") +
       "}";
 
     str +=
@@ -49,14 +54,30 @@ function setBoxTransitions(arr) {
       arr[i].id.replace("Off", "On") +
       "{" +
       "position: relative;" +
-      "right: 0vw;" +
-      "transition-property: right;" +
-      "transition-duration: 0.5s;" +
-      "transition-timing-function: ease-in-out;" +
-      "transition-delay: 0ms;" +
+      (direction + ": 0vw;") +
+      //"transition: all 1000ms cubic-bezier(0.64, -0.37, 0.61, 1.27);" +
+      "transition: all 1000ms cubic-bezier(.64,-0.37,.34,.9);" +
+      ("transition-delay: " + random(200) + "ms;") +
       "}";
   }
   return str;
+}
+
+// returns int in range smallest arg(inclusive) to largest arg(exclusive). 0 - largest if min value missing.
+function random(max, min) {
+  if (arguments.length > 1) {
+    return Math.floor(
+      Math.random() * Math.abs(max - min) + (max > min ? min : max)
+    );
+  } else {
+    return Math.floor(Math.random() * max);
+  }
+}
+
+// returns a random css direction
+function randomDirection() {
+  let arr = ["left", "right", "top", "bottom"];
+  return arr[random(4)];
 }
 
 var boxOnOffStyle = document.createElement("style");
@@ -70,25 +91,9 @@ doAll(box, setValue, "color", "magenta");
 doAll(nav, setValue, "color", "red");
 
 colorTheme = {};
-/*
-  document
-    .getElementById("box1")
-    .addEventListener("click", doAll.bind(this, box, setValue, "color", "white"));
-
-  document
-    .getElementById("box2")
-    .addEventListener("click", doAll.bind(this, box, setValue, "color", "red"));
-    document.getElementById("projects").addEventListener("click", function() {
-      document.getElementById("box6").style.left = "0vw";
-  });
-*/
 
 document.getElementById("projects").addEventListener("click", function() {
   for (let i = 0; i < box.length; i++) {
     onOff(box[i]);
   }
 });
-
-// document
-//   .getElementById("projects")
-//   .addEventListener("click", onOff.bind(this, box[1]));
