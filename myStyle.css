@@ -4,11 +4,11 @@
 
 body {
   font-size: 2vw;
+  margin: 0;
 }
 
 #navlist {
   display: flex;
-  background-color: yellow;
   padding: 0.5vw;
   margin: 0;
   padding-left: 10vw;
@@ -25,6 +25,7 @@ body {
 }
 
 #grid {
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(20vh, auto);
@@ -55,7 +56,9 @@ body {
   animation-iteration-count: 0;
 }
 
-#box6 {
+#box6Off {
+  position: relative;
+  right: 100vw;
 }
 
 @keyframes example {
