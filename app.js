@@ -3,6 +3,10 @@ let box = document.getElementById("grid").querySelectorAll("div");
 // create an array of all li in navlist
 let nav = document.getElementById("navlist").querySelectorAll("li");
 
+var boxOnOffStyle = document.createElement("style");
+boxOnOffStyle.innerHTML = setBoxTransitions(box);
+document.body.appendChild(boxOnOffStyle);
+
 // takes an array of elements and sends each element to the passed function
 function doAll(siblingArray, func, property, value) {
   if (property && value) {
@@ -37,14 +41,14 @@ function setBoxTransitions(arr) {
   var direction;
   for (let i = 0; i < arr.length; i++) {
     arr[i].id;
-    direction = randomDirection();
+    //direction = randomDirection();
+    direction = randomProperty("top", "bottom");
     str +=
       "#" +
       arr[i].id +
       "{" +
       "position: relative;" +
       (direction + ": 100vw;") +
-      //"transition: all 1000ms cubic-bezier(0.64, -0.37, 0.61, 1.27);" +
       "transition: all 1000ms cubic-bezier(.64,-0.37,.34,.9);" +
       ("transition-delay: " + random(200) + "ms;") +
       "}";
@@ -55,7 +59,6 @@ function setBoxTransitions(arr) {
       "{" +
       "position: relative;" +
       (direction + ": 0vw;") +
-      //"transition: all 1000ms cubic-bezier(0.64, -0.37, 0.61, 1.27);" +
       "transition: all 1000ms cubic-bezier(.64,-0.37,.34,.9);" +
       ("transition-delay: " + random(200) + "ms;") +
       "}";
@@ -80,9 +83,10 @@ function randomDirection() {
   return arr[random(4)];
 }
 
-var boxOnOffStyle = document.createElement("style");
-boxOnOffStyle.innerHTML = setBoxTransitions(box);
-document.body.appendChild(boxOnOffStyle);
+// returns a random property that was passed
+function randomProperty() {
+  return arguments[random(arguments.length)];
+}
 
 //test fluff
 
