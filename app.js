@@ -16,7 +16,6 @@ let nav = document.getElementById("navlist").querySelectorAll("li");
     element.style.transitionDuration = "200ms";
     element.style.transitionTimingFunction = "cubic-bezier(.64,-0.37,.34,.9)";
     element.style.transitionDelay = random(1000) + "ms";
-    console.log(element.style.transitionDelay);
 
     // method to transition elements onto screen
     element.on = function() {
