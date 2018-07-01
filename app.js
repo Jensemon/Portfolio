@@ -1,103 +1,90 @@
 // create an array of all divs in grid
 let box = document.getElementById("grid").querySelectorAll("div");
+
 // create an array of all li in navlist
 let nav = document.getElementById("navlist").querySelectorAll("li");
 
-var boxOnOffStyle = document.createElement("style");
-boxOnOffStyle.innerHTML = setBoxTransitions(box);
-document.body.appendChild(boxOnOffStyle);
+// IIFE that creates properties and methods on each box
+(function setBox(box) {
+  // shuffles the nodelist
+  shuffle(box);
 
-// takes an array of elements and sends each element to the passed function
-function doAll(siblingArray, func, property, value) {
-  if (property && value) {
-    for (let i = 0; i < siblingArray.length; i++) {
-      func(siblingArray[i], property, value);
-    }
-  } else {
-    throw "No property or value passed";
-  }
+  // loops through the nodelist to set properties and methods
+  box.forEach(element => {
+    element.style.position = "relative";
+    element.style.transitionProperty = "all";
+    element.style.transitionDuration = "200ms";
+    element.style.transitionTimingFunction = "cubic-bezier(.64,-0.37,.34,.9)";
+    element.style.transitionDelay = random(1000) + "ms";
+    console.log(element.style.transitionDelay);
+
+    // method to transition elements onto screen
+    element.on = function() {
+      element.status = true; // no current usecase, for testing
+      element.style.left = "0vw";
+    };
+    // method to transition elements off screen
+    element.off = function() {
+      element.status = false; // no current usecase, for testing
+      element.style.left = "100vw";
+    };
+    // immediately invoke 'off' to initially render elements off screen
+    element.off();
+  });
+})(box);
+
+// invokes the passed method on each element in a nodelist
+function invokeAll(nodeList, method) {
+  nodeList.forEach(element => {
+    element[method]();
+  });
 }
 
-// sets 'value' of desired 'property' on passed element
-function setValue(element, property, value) {
-  element.style[property] = value;
-}
-
-// looks for "On" and "Off" in an elements id, replace with the other if it exists.
-function onOff(element) {
-  if (element.id.includes("Off")) {
-    element.id = element.id.replace("Off", "On");
-  } else if (element.id.includes("On")) {
-    element.id = element.id.replace("On", "Off");
-  } else throw 'Id does not contain "On" or "Off"';
-}
-
-// takes an array of html elements that all needs an id that includes('Off')
-// loops through each element and appends an empty string with properties and
-// values for each elements 'Off' and 'On' state
-// returns the css string
-function setBoxTransitions(arr) {
-  var str = "";
-  var direction;
+// shuffles an array and returns it
+function shuffle(arr) {
+  var x;
+  var temp;
   for (let i = 0; i < arr.length; i++) {
-    arr[i].id;
-    //direction = randomDirection();
-    direction = randomProperty("top", "bottom");
-    str +=
-      "#" +
-      arr[i].id +
-      "{" +
-      "position: relative;" +
-      (direction + ": 100vw;") +
-      "transition: all 1000ms cubic-bezier(.64,-0.37,.34,.9);" +
-      ("transition-delay: " + random(200) + "ms;") +
-      "}";
-
-    str +=
-      "#" +
-      arr[i].id.replace("Off", "On") +
-      "{" +
-      "position: relative;" +
-      (direction + ": 0vw;") +
-      "transition: all 1000ms cubic-bezier(.64,-0.37,.34,.9);" +
-      ("transition-delay: " + random(200) + "ms;") +
-      "}";
+    x = random(arr.length);
+    temp = arr[i];
+    arr[i] = arr[x];
+    arr[x] = temp;
   }
-  return str;
+  return arr;
 }
 
-// returns int in range smallest arg(inclusive) to largest arg(exclusive). 0 - largest if min value missing.
+// If one number is passed return random int from 0(inclusive) to that number(exclusive)
+// If two numbers are passed return a random int between them (including the lower, excluding the higher)
+// If an array is passed return a random element
 function random(max, min) {
-  if (arguments.length > 1) {
+  if (Array.isArray(max)) {
+    return max[random(max.length)];
+  } else if (arguments.length > 1) {
     return Math.floor(
       Math.random() * Math.abs(max - min) + (max > min ? min : max)
     );
-  } else {
+  } else if (arguments.length === 1) {
     return Math.floor(Math.random() * max);
+  } else {
+    throw "random() must be called with 1-2 numbers or an array";
   }
 }
 
-// returns a random css direction
-function randomDirection() {
-  let arr = ["left", "right", "top", "bottom"];
-  return arr[random(4)];
-}
-
-// returns a random property that was passed
-function randomProperty() {
-  return arguments[random(arguments.length)];
-}
-
-//test fluff
-
-//setValue(box[1], "color", "red");
-doAll(box, setValue, "color", "magenta");
-doAll(nav, setValue, "color", "red");
-
-colorTheme = {};
+document.getElementById("about").addEventListener("click", function() {
+  invokeAll(box, "off");
+});
+document.getElementById("contact").addEventListener("click", function() {
+  invokeAll(box, "off");
+});
 
 document.getElementById("projects").addEventListener("click", function() {
-  for (let i = 0; i < box.length; i++) {
-    onOff(box[i]);
-  }
+  invokeAll(box, "on");
 });
+
+/////////////////////////////////////////// /////////////////////////////////////////
+// ##### /// ##### ///// #### //// ##### // //// ### ///// ### /// ### ///// ##### //
+//// # ///// # //////// #    # ///// # //// /// # /////// #   # // #  # //// # //////
+//// # ///// ### /////// ### /////// # //// // # /////// #    # // #   # /// ### ////
+//// # ///// # /////// #    # ////// # //// // # /////// #   # /// #  # //// # //////
+//// # ///// ##### //// #### /////// # //// /// #### //// ### //// ### ///// ##### //
+/////////////////////////////////////////// /////////////////////////////////////////
