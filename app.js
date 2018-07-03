@@ -1,34 +1,69 @@
 // create an array of all divs in grid
 let box = document.getElementById("grid").querySelectorAll("div");
-
 // create an array of all li in navlist
-let nav = document.getElementById("navlist").querySelectorAll("li");
+//let nav = document.getElementById("navlist").querySelectorAll("li");
+let nav = document.getElementById("navbar").querySelectorAll("div");
+
+var boxBg = document.getElementById("gridBg");
+boxBg.style.width = document.getElementById("grid").offsetWidth + "px";
+boxBg.style.height = document.getElementById("grid").offsetHeight + "px";
+boxBg.style.top = document.getElementById("navbar").offsetHeight + "px";
 
 // IIFE that creates properties and methods on each box
 (function setBox(box) {
+  // set positions for animation start (invw), onscreen (onvw), animation end (outvw)
+  let invw = "-100vw";
+  let onvw = "0vw";
+  let outvw = "100vw";
+  let duration = "300ms";
+  // create and shuffle an organized array for transitionDelay
+  let delay = [];
+  for (let i = 0; i < box.length; i++) {
+    delay.push(60 * i);
+  }
+  shuffle(delay);
+
   // shuffles the nodelist
-  shuffle(box);
+  //shuffle(box);
 
   // loops through the nodelist to set properties and methods
   box.forEach(element => {
     element.style.position = "relative";
-    element.style.transitionProperty = "all";
-    element.style.transitionDuration = "200ms";
-    element.style.transitionTimingFunction = "cubic-bezier(.64,-0.37,.34,.9)";
-    element.style.transitionDelay = random(1000) + "ms";
+    element.style.left = invw;
+    element.style.transitionProperty = "left";
+    element.style.transitionDuration = duration;
+    // element.style.transitionTimingFunction = "cubic-bezier(.64,-0.37,.34,.9)";
+    element.style.transitionTimingFunction =
+      "cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+
+    element.style.transitionDelay = delay.shift() + "ms";
 
     // method to transition elements onto screen
     element.on = function() {
-      element.status = true; // no current usecase, for testing
-      element.style.left = "0vw";
+      element.style.left = onvw;
+      boxBg.style.opacity = "0.2";
     };
     // method to transition elements off screen
     element.off = function() {
-      element.status = false; // no current usecase, for testing
-      element.style.left = "100vw";
+      if (element.style.left === onvw) {
+        element.style.left = outvw;
+        boxBg.style.opacity = "0";
+      }
     };
-    // immediately invoke 'off' to initially render elements off screen
-    element.off();
+
+    element.addEventListener("transitionend", function() {
+      if (element.style.left === outvw) {
+        setTimeout(function() {
+          element.style.transitionDuration = "0ms";
+          setTimeout(function() {
+            element.style.left = invw;
+            setTimeout(function() {
+              element.style.transitionDuration = duration;
+            }, 20);
+          }, 20);
+        }, 20);
+      }
+    });
   });
 })(box);
 
