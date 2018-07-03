@@ -1,7 +1,5 @@
-// create an array of all divs in grid
+// nodelist creation
 let box = document.getElementById("grid").querySelectorAll("div");
-// create an array of all li in navlist
-//let nav = document.getElementById("navlist").querySelectorAll("li");
 let nav = document.getElementById("navbar").querySelectorAll("div");
 
 var boxBg = document.getElementById("gridBg");
