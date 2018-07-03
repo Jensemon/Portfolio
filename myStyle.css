@@ -1,8 +1,12 @@
 /* * {
   border: blue dashed;
 } */
+html {
+  height: 100%;
+}
 
 body {
+  min-height: 100%;
   font-size: 2vw;
   margin: 0;
   background-image: url("bodyBgEdit.jpg");
@@ -22,16 +26,31 @@ body {
   flex: 1;
   text-align: center;
 }
+#footer {
+  /* position: absolute; */
+  background-color: #775959;
+  display: flex;
+  flex-direction: column;
+  /* padding: 0.5vw; */
+  /* bottom: 0px; */
+  /* overflow: hidden; */
+}
+
+#footer div {
+  flex: 1;
+  /* text-align: center; */
+  /* overflow: hidden; */
+}
 
 #grid {
   position: relative;
-  background-color: "green";
   overflow: hidden;
   display: grid;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(25vh, auto);
+  /* grid-auto-rows: minmax(10vw, auto); */
+  grid-auto-rows: minmax(auto, 30vh);
   grid-gap: 0.5em;
   opacity: 0.8;
 
@@ -66,14 +85,4 @@ body {
   z-index: 50;
   opacity: 0;
   transition: 500ms opacity ease-in-out;
-}
-
-#footer {
-  background-color: #775959;
-  text-align: center;
-  display: flex;
-  padding: 0.5vw;
-  margin: 0;
-  padding-left: 10vw;
-  padding-right: 20vw;
 }

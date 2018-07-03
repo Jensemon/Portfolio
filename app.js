@@ -39,7 +39,7 @@ boxBg.style.top = document.getElementById("navbar").offsetHeight + "px";
     // method to transition elements onto screen
     element.on = function() {
       element.style.left = onvw;
-      boxBg.style.opacity = "0.2";
+      boxBg.style.opacity = "0.4";
     };
     // method to transition elements off screen
     element.off = function() {
