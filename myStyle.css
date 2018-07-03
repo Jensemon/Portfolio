@@ -5,7 +5,10 @@
 body {
   font-size: 2vw;
   margin: 0;
+  background-image: url("bodyBgEdit.jpg");
+  background-size: 100vw;
   background-color: #694e4e;
+  opacity: 0.9;
 }
 
 #navbar {
@@ -30,6 +33,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(25vh, auto);
   grid-gap: 0.5em;
+  opacity: 0.8;
 
   font-size: 2vw;
   z-index: 100;
@@ -58,7 +62,7 @@ body {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   overflow: hidden;
-  background: maroon;
+  background: #694e4e;
   z-index: 50;
   opacity: 0;
   transition: 500ms opacity ease-in-out;
