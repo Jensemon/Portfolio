@@ -1,11 +1,13 @@
 // nodelist creation
-let box = document.getElementById("grid").querySelectorAll("div");
+// let box = document.getElementById("grid").querySelectorAll("div");
+box = document.getElementById("grid").querySelectorAll(".box");
+
 let nav = document.getElementById("navbar").querySelectorAll("div");
 
 var boxBg = document.getElementById("gridBg");
-boxBg.style.width = document.getElementById("grid").offsetWidth + "px";
-boxBg.style.height = document.getElementById("grid").offsetHeight + "px";
-boxBg.style.top = document.getElementById("navbar").offsetHeight + "px";
+// boxBg.style.width = document.getElementById("grid").offsetWidth + "px";
+// boxBg.style.height = document.getElementById("grid").offsetHeight + "px";
+// boxBg.style.top = document.getElementById("navbar").offsetHeight + "px";
 
 // IIFE that creates properties and methods on each box
 (function setBox(box) {
@@ -39,7 +41,7 @@ boxBg.style.top = document.getElementById("navbar").offsetHeight + "px";
     // method to transition elements onto screen
     element.on = function() {
       element.style.left = onvw;
-      boxBg.style.opacity = "0.6";
+      boxBg.style.opacity = "0.4";
     };
     // method to transition elements off screen
     element.off = function() {
