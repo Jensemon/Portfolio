@@ -55,14 +55,13 @@ body {
 #navbar {
   grid-column: 1/4;
   display: flex;
-  padding: 0.5vw;
-  margin: 0;
 }
 
 #navbar div {
-  flex: 1;
   text-align: center;
+  flex: 1;
 }
+
 #footer {
   grid-column: 1/4;
   display: flex;
@@ -95,4 +94,7 @@ body {
 
 .btn {
   cursor: pointer;
+}
+.btn:hover {
+  background: radial-gradient(#e9eef3, #d1dbe3);
 }
