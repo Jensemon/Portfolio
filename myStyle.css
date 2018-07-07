@@ -9,6 +9,7 @@ body {
   min-height: 100%;
   font-size: 2vw;
   margin: 0;
+  background-color: #dfe7ec;
   background-image: url("bodyBgEdit.jpg");
   background-size: 100vw;
 }
@@ -40,8 +41,15 @@ body {
   background: #d6c9c9;
 }
 
+#grid > .box:hover {
+  background: #9a97ce;
+}
+
 #grid > .box:nth-child(even) {
   background: #e8eef2;
+}
+#grid > .box:nth-child(even):hover {
+  background: #9a97ce;
 }
 
 #navbar {
@@ -83,4 +91,8 @@ body {
 
 .mainColor {
   background: #d1dbe3;
+}
+
+.btn {
+  cursor: pointer;
 }

@@ -35,6 +35,7 @@ var boxBg = document.getElementById("gridBg");
     // element.style.transitionTimingFunction = "cubic-bezier(.64,-0.37,.34,.9)";
     element.style.transitionTimingFunction =
       "cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+    element.style.transitionTimingFunction = "ease-in-out";
 
     element.style.transitionDelay = delay.shift() + "ms";
 
@@ -51,6 +52,9 @@ var boxBg = document.getElementById("gridBg");
       }
     };
 
+    // to move elements back to the left side of the viewport transitionDuration is set back to 0ms
+    // transitionDuration needs a few ms after update to take effect
+    // 20ms callbacks are given so everything runs smoothly
     element.addEventListener("transitionend", function() {
       if (element.style.left === outvw) {
         setTimeout(function() {
