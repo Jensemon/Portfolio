@@ -110,13 +110,16 @@ function random(max, min) {
 
 document.getElementById("about").addEventListener("click", function() {
   invokeAll(box, "off");
+  renderAbout();
 });
 document.getElementById("contact").addEventListener("click", function() {
   invokeAll(box, "off");
+  renderContact();
 });
 
 document.getElementById("projects").addEventListener("click", function() {
   invokeAll(box, "on");
+  renderProjects();
 });
 
 /////////////////////////////////////////// /////////////////////////////////////////

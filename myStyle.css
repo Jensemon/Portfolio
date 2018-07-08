@@ -98,3 +98,18 @@ body {
 .btn:hover {
   background: radial-gradient(#e9eef3, #d1dbe3);
 }
+
+#content {
+  position: fixed;
+  left: 0;
+  top: calc(12.5vh - 0.25em);
+  width: 100vw;
+  height: 75vh;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  overflow: hidden;
+  background: #7f818100;
+  z-index: 50;
+  opacity: 1;
+  transition: 500ms opacity ease-in-out;
+}
