@@ -5,9 +5,6 @@ box = document.getElementById("grid").querySelectorAll(".box");
 let nav = document.getElementById("navbar").querySelectorAll("div");
 
 var boxBg = document.getElementById("gridBg");
-// boxBg.style.width = document.getElementById("grid").offsetWidth + "px";
-// boxBg.style.height = document.getElementById("grid").offsetHeight + "px";
-// boxBg.style.top = document.getElementById("navbar").offsetHeight + "px";
 
 // IIFE that creates properties and methods on each box
 (function setBox(box) {

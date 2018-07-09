@@ -10,6 +10,13 @@ aboutHeading.innerHTML = aboutStrings.heading;
 var aboutContent = document.createElement("p");
 aboutContent.innerHTML = aboutStrings.content;
 
+//
+for (key in template.home) {
+  console.log(template.home[key]);
+  aboutContent.style[key] = template.home[key];
+}
+//content.style["text-align"] = "center";
+//
 const content = document.getElementById("content");
 
 function renderAbout() {
