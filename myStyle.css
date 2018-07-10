@@ -15,12 +15,12 @@ body {
 }
 
 #grid {
-  position: relative;
+  position: absolute;
   overflow: hidden;
   display: grid;
   grid-template-rows: 1fr 2fr 2fr 2fr 1fr;
   grid-template-columns: auto;
-  grid-gap: 0.5em;
+  grid-gap: 3vh;
   opacity: 0.8;
 
   font-size: 2vw;
@@ -30,15 +30,13 @@ body {
 }
 
 #grid > div {
-  padding: 1em;
-  font-size: 1.5vw;
-
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
 #grid > .box {
   background: #d6c9c9;
+  align-items: center;
+  justify-content: center;
 }
 
 #grid > .box:hover {
@@ -54,18 +52,17 @@ body {
 
 #navbar {
   grid-column: 1/4;
-  display: flex;
 }
 
 #navbar div {
   text-align: center;
   flex: 1;
+  line-height: 12.5vh;
 }
 
 #footer {
   grid-column: 1/4;
   display: flex;
-  flex-direction: column;
 }
 
 #footer div {
@@ -76,11 +73,16 @@ body {
 #gridBg {
   position: fixed;
   left: 0;
-  top: calc(12.5vh - 0.25em);
+  top: 12.5vh;
   width: 100vw;
   height: 75vh;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
+  /* top row is sized based on fr, all other rows are calculated together with the gap
+   * 4 * 3vh gap == 12vh. First row is 1/8 of 100vh == 12.5vh. Remaining 7 fr is 100 - 12 - 12.5 = 75.5
+   * bottom is 1fr or 75.5/7 == 10.786
+   * the space to be filled is therefore 100vh - top row - bottom row = 100vh - 10.786vh - 12.5vh = 76.714;
+   * hence the 1.7vh padding added to the 75vh height;
+   */
+  padding-bottom: 1.7vh;
   overflow: hidden;
   background: #7f8181;
   z-index: 50;
@@ -102,13 +104,11 @@ body {
 #content {
   position: fixed;
   left: 0;
-  top: calc(12.5vh - 0.25em);
+  top: 12.5vh;
   width: 100vw;
-  height: 75vh;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
+  height: 76.7vh;
   overflow: hidden;
-  background: #7f818100;
+  background: #98fdfd00;
   z-index: 50;
   opacity: 1;
   transition: 500ms opacity ease-in-out;
