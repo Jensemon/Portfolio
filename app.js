@@ -1,10 +1,10 @@
 // nodelist creation
 // let box = document.getElementById("grid").querySelectorAll("div");
-box = document.getElementById("grid").querySelectorAll(".box");
+const box = document.getElementById("grid").querySelectorAll(".box");
 
-let nav = document.getElementById("navbar").querySelectorAll("div");
+const nav = document.getElementById("navbar").querySelectorAll("div");
 
-var boxBg = document.getElementById("gridBg");
+const boxBg = document.getElementById("gridBg");
 
 // IIFE that creates properties and methods on each box
 (function setBox(box) {
